@@ -6,14 +6,13 @@ import (
 	"fmt"
 )
 
-
-// interesting note with parsing - have to define the top fields before we can 
-/  get to vol.  Is this just a golang quirk?
+// interesting note with parsing - have to define the top fields before we can
+//  get to vol.  Is this just a golang quirk?
 type ticker struct {
 	High high `json:"high"`
-  Low low `json:"low"`
-  Avg avg `json:"avg"`
-  Vwap vwap `json:"vwap"`
+	Low  low  `json:"low"`
+	Avg  avg  `json:"avg"`
+	Vwap vwap `json:"vwap"`
 	Vol  vol  `json:"vol"`
 }
 
@@ -22,15 +21,15 @@ type high struct {
 }
 
 type low struct {
-  Value float64 `json:"value,string"`
+	Value float64 `json:"value,string"`
 }
 
 type vwap struct {
-  Value float64 `json:"value,string"`
+	Value float64 `json:"value,string"`
 }
 
 type avg struct {
-  Value float64 `json:"value,string"`
+	Value float64 `json:"value,string"`
 }
 
 type vol struct {
