@@ -4,18 +4,25 @@ import(
   "fmt"
   "github.com/blooberr/coin-exchange/libcoin/btc/btc-e"
   "github.com/blooberr/coin-exchange/libcoin/btc/bitstamp"
+  "github.com/blooberr/coin-exchange/libcoin/btc/mtgox"
 )
 
 func main() {
   fmt.Printf("connecting to exchanges.. \n")
   fmt.Printf("feed running on: \n")
 
-  v := btce.GetTicker()
-
+  //v := btce.GetTicker()
   //v := libcoin.CoinPacket{ Exchange: "hello" }
-  fmt.Printf("btce -> %s\n", string(v))
+  //fmt.Printf("btce -> %s\n", string(v))
 
-  bt := bitstamp.GetTicker()
-  fmt.Printf("bitstamp -> %s\n", string(bt))
+  go func() {
+    btce.Loop()
+  }()
+
+  go func() {
+    bitstamp.Loop()
+  }()
+
+  mtgox.Loop()
 }
 

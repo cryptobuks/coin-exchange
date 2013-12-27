@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+  "time"
   "github.com/blooberr/coin-exchange/libcoin"
 )
 
@@ -29,11 +30,20 @@ func GetTicker() ([]byte) {
 	info := &Exchange{}
 	json.Unmarshal(body, &info)
 
-	fmt.Printf("coin info: %+v \n", info)
+	//fmt.Printf("coin info: %+v \n", info)
 
 	cp := &libcoin.CoinPacket{Exchange: "bitstamp", Last: info.Last, CurrentVolume: info.Volume, Currency: "usd"}
-	fmt.Printf("cp: %+v \n", cp)
+	//fmt.Printf("cp: %+v \n", cp)
   b, _ := json.Marshal(cp)
   return b
+}
+
+func Loop() {
+  ticker := time.NewTicker(time.Millisecond * 10000)
+
+  for t := range ticker.C {
+    fmt.Printf("[%s] [bitstamp]: %s \n", t, GetTicker())
+  }
+
 }
 
