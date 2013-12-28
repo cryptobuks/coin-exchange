@@ -6,6 +6,7 @@ import(
   "github.com/blooberr/coin-exchange/libcoin/btc/bitstamp"
   "github.com/blooberr/coin-exchange/libcoin/btc/mtgox"
   "github.com/blooberr/coin-exchange/libcoin/btc/coinbase"
+  "github.com/blooberr/coin-exchange/libcoin/btc/vircurex"
 )
 
 func main() {
@@ -26,6 +27,10 @@ func main() {
 
   go func() {
     coinbase.Loop(3000)
+  }()
+
+  go func() {
+    vircurex.Loop(8000)
   }()
 
   mtgox.Loop()
