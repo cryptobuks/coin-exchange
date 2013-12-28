@@ -1,12 +1,12 @@
 package btce
 
-import(
-  "fmt"
-  "net/http"
-  "io/ioutil"
-  "encoding/json"
-  "github.com/blooberr/coin-exchange/libcoin"
-  "time"
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/blooberr/coin-exchange/libcoin"
+	"io/ioutil"
+	"net/http"
+	"time"
 )
 
 type exchange struct {
@@ -26,7 +26,7 @@ type ticker struct {
 	ServerTime int64   `json:"server_time"`
 }
 
-func GetTicker() ([]byte) {
+func GetTicker() []byte {
 	url := "https://btc-e.com/api/2/btc_usd/ticker"
 	res, _ := http.Get(url)
 	body, _ := ioutil.ReadAll(res.Body)
@@ -37,18 +37,17 @@ func GetTicker() ([]byte) {
 	//fmt.Printf("coin info: %+v \n", info)
 
 	cp := &libcoin.CoinPacket{Exchange: "btc-e", Last: info.Ticker.Last, CurrentVolume: info.Ticker.VolCur, Currency: "usd"}
-  //fmt.Printf("cp: %+v \n", cp)
+	//fmt.Printf("cp: %+v \n", cp)
 
-  b, _ := json.Marshal(cp)
-  return b
+	b, _ := json.Marshal(cp)
+	return b
 }
 
 func Loop(interval int64) {
-  ticker := time.NewTicker(time.Millisecond * time.Duration(interval))
+	ticker := time.NewTicker(time.Millisecond * time.Duration(interval))
 
-  for t := range ticker.C {
-    fmt.Printf("[%s] [btc-e]: %s \n", t, GetTicker())
-  }
+	for t := range ticker.C {
+		fmt.Printf("[%s] [btc-e]: %s \n", t, GetTicker())
+	}
 
 }
-

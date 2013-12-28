@@ -4,7 +4,7 @@ import (
 	"code.google.com/p/go.net/websocket"
 	"encoding/json"
 	"fmt"
-  "github.com/blooberr/coin-exchange/libcoin"
+	"github.com/blooberr/coin-exchange/libcoin"
 )
 
 type ticker struct {
@@ -68,7 +68,7 @@ type exchange struct {
 func Loop() {
 	origin := "http://localhost"
 	ws, err := websocket.Dial("ws://websocket.mtgox.com:80/mtgox?Currency=USD", "", origin)
-  libcoin.PanicError(err)
+	libcoin.PanicError(err)
 
 	cp := &libcoin.CoinPacket{}
 
@@ -76,7 +76,7 @@ func Loop() {
 	info := &exchange{}
 	for {
 		n, err := ws.Read(resp)
-    libcoin.PanicError(err)
+		libcoin.PanicError(err)
 
 		// fmt.Printf("Received: %s\n", string(resp[0:n]))
 		json.Unmarshal(resp[0:n], &info)
@@ -91,11 +91,10 @@ func Loop() {
 			cp.Last = info.Ticker.Last.Value
 			cp.Currency = info.Ticker.Last.Currency
 			cp.CurrentVolume = info.Ticker.Vol.Value
-      b, _ := json.Marshal(cp)
+			b, _ := json.Marshal(cp)
 			//fmt.Printf("cp: %+v \n", cp)
 
-      fmt.Printf("[%s] [mtgox]: %s \n", info.Ticker.Now, b)
+			fmt.Printf("[%s] [mtgox]: %s \n", info.Ticker.Now, b)
 		}
 	}
 }
-

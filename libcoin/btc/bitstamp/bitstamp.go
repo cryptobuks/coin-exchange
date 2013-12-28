@@ -3,10 +3,10 @@ package bitstamp
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/blooberr/coin-exchange/libcoin"
 	"io/ioutil"
 	"net/http"
-  "time"
-  "github.com/blooberr/coin-exchange/libcoin"
+	"time"
 )
 
 /*
@@ -23,7 +23,7 @@ type Exchange struct {
 	Ask       float64 `json:"ask,string"`
 }
 
-func GetTicker() ([]byte) {
+func GetTicker() []byte {
 	url := "https://www.bitstamp.net/api/ticker/"
 	res, _ := http.Get(url)
 	body, _ := ioutil.ReadAll(res.Body)
@@ -34,16 +34,15 @@ func GetTicker() ([]byte) {
 
 	cp := &libcoin.CoinPacket{Exchange: "bitstamp", Last: info.Last, CurrentVolume: info.Volume, Currency: "usd"}
 	//fmt.Printf("cp: %+v \n", cp)
-  b, _ := json.Marshal(cp)
-  return b
+	b, _ := json.Marshal(cp)
+	return b
 }
 
 func Loop(interval int64) {
-  ticker := time.NewTicker(time.Millisecond * time.Duration(interval))
+	ticker := time.NewTicker(time.Millisecond * time.Duration(interval))
 
-  for t := range ticker.C {
-    fmt.Printf("[%s] [bitstamp]: %s \n", t, GetTicker())
-  }
+	for t := range ticker.C {
+		fmt.Printf("[%s] [bitstamp]: %s \n", t, GetTicker())
+	}
 
 }
-
