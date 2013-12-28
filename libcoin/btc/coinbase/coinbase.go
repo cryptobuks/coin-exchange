@@ -31,8 +31,8 @@ func GetTicker() ([]byte) {
   return b
 }
 
-func Loop() {
-  ticker := time.NewTicker(time.Millisecond * 10000)
+func Loop(interval int64) {
+  ticker := time.NewTicker(time.Millisecond * time.Duration(10000))
 
   for t := range ticker.C {
     fmt.Printf("[%s] [coinbase]: %s \n", t, GetTicker())

@@ -43,8 +43,8 @@ func GetTicker() ([]byte) {
   return b
 }
 
-func Loop() {
-  ticker := time.NewTicker(time.Millisecond * 10000)
+func Loop(interval int64) {
+  ticker := time.NewTicker(time.Millisecond * time.Duration(interval))
 
   for t := range ticker.C {
     fmt.Printf("[%s] [btc-e]: %s \n", t, GetTicker())

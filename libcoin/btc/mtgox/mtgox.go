@@ -86,12 +86,15 @@ func Loop() {
 			//fmt.Printf("%+v \n", info)
 			//fmt.Printf("last: %f (%s) with volume: %f \n", info.Ticker.Last.Value, info.Ticker.Last.Currency, info.Ticker.Vol.Value)
 
-			fmt.Printf("timestamp: %d \n", info.Ticker.Now)
+			//fmt.Printf("timestamp: %d \n", info.Ticker.Now)
 			cp.Exchange = "mtgox"
 			cp.Last = info.Ticker.Last.Value
 			cp.Currency = info.Ticker.Last.Currency
 			cp.CurrentVolume = info.Ticker.Vol.Value
-			fmt.Printf("cp: %+v \n", cp)
+      b, _ := json.Marshal(cp)
+			//fmt.Printf("cp: %+v \n", cp)
+
+      fmt.Printf("[%s] [mtgox]: %s \n", info.Ticker.Now, b)
 		}
 	}
 }

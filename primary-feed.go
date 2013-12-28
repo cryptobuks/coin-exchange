@@ -17,15 +17,15 @@ func main() {
   //fmt.Printf("btce -> %s\n", string(v))
 
   go func() {
-    btce.Loop()
+    btce.Loop(5000)
   }()
 
   go func() {
-    bitstamp.Loop()
+    bitstamp.Loop(10000)
   }()
 
   go func() {
-    coinbase.Loop()
+    coinbase.Loop(3000)
   }()
 
   mtgox.Loop()
