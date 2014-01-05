@@ -7,7 +7,8 @@ import (
 	"github.com/blooberr/coin-exchange/libcoin/btc/coinbase"
 	"github.com/blooberr/coin-exchange/libcoin/btc/mtgox"
 	"github.com/blooberr/coin-exchange/libcoin/btc/vircurex"
-  "time"
+  "github.com/blooberr/coin-exchange/libcoin/btc/campbx"
+//  "time"
 )
 
 func main() {
@@ -35,8 +36,12 @@ func main() {
 	}()
 
   go func() {
-	  mtgox.Loop()
+    campbx.Loop(2500)
   }()
+
+  //go func() {
+	  mtgox.Loop()
+  //}()
 
 
 }
