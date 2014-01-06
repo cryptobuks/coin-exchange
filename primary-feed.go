@@ -8,6 +8,7 @@ import (
 	"github.com/blooberr/coin-exchange/libcoin/btc/mtgox"
 	"github.com/blooberr/coin-exchange/libcoin/btc/vircurex"
   "github.com/blooberr/coin-exchange/libcoin/btc/campbx"
+  "github.com/blooberr/coin-exchange/libcoin/btc/localbitcoins"
 //  "time"
 )
 
@@ -37,6 +38,10 @@ func main() {
 
   go func() {
     campbx.Loop(2500)
+  }()
+
+  go func() {
+    localbitcoins.Loop(5000)
   }()
 
   //go func() {
