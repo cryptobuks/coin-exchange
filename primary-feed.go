@@ -41,7 +41,7 @@ func main() {
   }()
 
   go func() {
-    localbitcoins.Loop(5000)
+    localbitcoins.Loop(10000)
   }()
 
   //go func() {
