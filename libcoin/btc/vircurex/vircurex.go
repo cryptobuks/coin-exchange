@@ -33,7 +33,7 @@ func GetTicker() []byte {
 	err = json.Unmarshal(body, &data)
 	libcoin.PanicError(err)
 
-	fmt.Printf("data: %s\n", data)
+	//fmt.Printf("data: %s\n", data)
 
 	cp := &libcoin.CoinPacket{Exchange: "vircurex", Last: data.LastTrade, CurrentVolume: data.Volume, Currency: "usd"}
 	b, _ := json.Marshal(cp)

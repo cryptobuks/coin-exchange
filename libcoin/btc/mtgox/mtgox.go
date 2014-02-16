@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/blooberr/coin-exchange/libcoin"
+  "time"
 )
 
 type ticker struct {
@@ -94,7 +95,7 @@ func Loop() {
 			b, _ := json.Marshal(cp)
 			//fmt.Printf("cp: %+v \n", cp)
 
-			fmt.Printf("[%s] [mtgox]: %s \n", info.Ticker.Now, b)
+			fmt.Printf("[%s] [mtgox]: %s \n", time.Unix(info.Ticker.Now / 1000000, 0), b)
 		}
 	}
 }

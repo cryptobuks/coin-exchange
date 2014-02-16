@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"github.com/blooberr/coin-exchange/libcoin/btc/bitstamp"
 	"github.com/blooberr/coin-exchange/libcoin/btc/btc-e"
+	"github.com/blooberr/coin-exchange/libcoin/btc/campbx"
 	"github.com/blooberr/coin-exchange/libcoin/btc/coinbase"
+	"github.com/blooberr/coin-exchange/libcoin/btc/localbitcoins"
 	"github.com/blooberr/coin-exchange/libcoin/btc/mtgox"
 	"github.com/blooberr/coin-exchange/libcoin/btc/vircurex"
-  "github.com/blooberr/coin-exchange/libcoin/btc/campbx"
-  "github.com/blooberr/coin-exchange/libcoin/btc/localbitcoins"
-//  "time"
+	//  "time"
 )
 
 func main() {
@@ -36,18 +36,16 @@ func main() {
 		vircurex.Loop(8000)
 	}()
 
-  go func() {
-    campbx.Loop(2500)
-  }()
+	go func() {
+		campbx.Loop(2500)
+	}()
 
-  go func() {
-    localbitcoins.Loop(10000)
-  }()
+	go func() {
+		localbitcoins.Loop(10000)
+	}()
 
-  //go func() {
-	  mtgox.Loop()
-  //}()
-
+	//go func() {
+	mtgox.Loop()
+	//}()
 
 }
-
